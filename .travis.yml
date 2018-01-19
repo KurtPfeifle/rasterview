@@ -1,0 +1,80 @@
+sudo: required # needed for trusty beta
+dist: trusty   # needed for HarfBuzz
+
+language: c
+
+compiler:
+  - clang
+  - gcc
+
+before_script:
+  - env | grep -i travis
+  - sudo apt-get update -q
+  - sudo apt-get install libfltk1.3-dev
+  
+script: |
+
+  # Debug settings
+  set -e
+  set -x
+  
+  # Build settings
+  export OMP_NUM_THREADS=1
+  export CFLAGS="-Wno-deprecated-declarations -Wdeclaration-after-statement -Wno-error=unused-variable"
+  
+  # Prepare Freedesktop/AppStream stuff
+  mkdir -p appdir/usr/share/applications/ ; cp ./rasterview.desktop ./appdir/usr/share/applications/
+  mkdir -p appdir/usr/share/icons/hicolor/128x128/apps/ ; cp ./rasterview-128.png  ./appdir/usr/share/icons/hicolor/128x128/apps/rasterview.png
+  mkdir -p appdir/usr/share/metainfo/ ; cp ./appimage/rasterview.appdata.xml  ./appdir/usr/share/metainfo/
+  echo "$(appstreamcli --version)"
+  echo "$(appstreamcli validate --verbose ./appimage/rasterview.appdata.xml)"
+  
+  # Configure step
+  ./configure --prefix=/usr
+  
+  # Make & install
+  make
+  make install DESTDIR=$(readlink -f appdir)
+  
+  # Get linuxdeployqt to check prepare the AppDir
+  wget -c "https://github.com/probonopd/linuxdeployqt/releases/download/continuous/linuxdeployqt-continuous-x86_64.AppImage"
+  
+  # linuxdeployqt is not executable after download
+  chmod a+x linuxdeployqt*.AppImage
+  
+  # Prepare to check + set up the AppDir ( = install-dir)
+  unset QTDIR; unset QT_PLUGIN_PATH ; unset LD_LIBRARY_PATH
+  
+  # Now let linuxdeployqt do its work (but do not use its '-appimage' param...)
+  ./linuxdeployqt*.AppImage ./appdir/usr/share/applications/rasterview.desktop -bundle-non-qt-libs
+  
+  # Extract the linuxdeployqt AppImage, because it contains 'appimagetool',
+  # which we prefer to run under our own settings instead of the defaults
+  ./linuxdeployqt*.AppImage --appimage-extract
+  
+  # Now run 'appimagetool' with our settings:
+  PATH=./squashfs-root/usr/bin:$PATH ./squashfs-root/usr/bin/appimagetool -v -u 'gh-releases-zsync|KurtPfeifle|RasterView|continuous|RasterView-*x86_64.AppImage.zsync' ./appdir/
+  
+  # See if there are any libs left which point to the wrong directories:
+  find ./appdir -executable -type f -exec ldd {} \; | grep " => /usr" | cut -d " " -f 2-3 | sort | uniq
+  
+  # Set a version string
+  export VERSION="git.$(git rev-parse --short HEAD)-v1.5"
+  
+  # See in Travis log what we've got:
+  find . -name "*.AppImage"
+  
+  # Rename our AppImage to include a version string
+  mv rasterview*.AppImage rasterview-$VERSION-x86_64.AppImage
+  
+  # Fetch probono's upload tool:
+  wget -c https://github.com/probonopd/uploadtool/raw/master/upload.sh
+  
+  # Upload our AppImage to the GitHub releases page:
+  bash upload.sh rasterview-$VERSION-x86_64.AppImage
+  
+  # Also upload to transfer.sh
+  curl --upload-file ./rasterview-$VERSION-x86_64.AppImage  https://transfer.sh/rasterview-$VERSION-x86_64.AppImage
+  
+after_success:
+  # Do nothing for now
