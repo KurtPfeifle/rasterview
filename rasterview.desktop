@@ -1,11 +1,11 @@
 [Desktop Entry]
 Name=RasterView
-Comment=CUPS Raster Viewer
+Comment=Raster Viewer for CUPS-Raster, Apple-Raster and PWG-Raster
 TryExec=rasterview
 Exec=rasterview %F
 Icon=rasterview.png
-Terminal=false
-Type=Application
 MimeType=application/vnd.cups-raster
 Encoding=UTF-8
 Categories=Graphics;
+Type=Application
+Terminal=false
