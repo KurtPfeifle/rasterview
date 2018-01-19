@@ -66,18 +66,19 @@ script:
 
   # See in Travis log what we've got:
     - find . -name "*.AppImage"
+    - find ./usr/bin -iname "*rasterview*"
 
   # Rename our AppImage to include a version string
-    - mv rasterview*.AppImage rasterview-$VERSION-x86_64.AppImage
+    - mv RasterView*.AppImage RasterView-$VERSION-x86_64.AppImage
 
   # Fetch probono's upload tool:
     - wget -c https://github.com/probonopd/uploadtool/raw/master/upload.sh
 
   # Upload our AppImage to the GitHub releases page:
-    - bash upload.sh rasterview-$VERSION-x86_64.AppImage
+    - bash upload.sh RasterView-$VERSION-x86_64.AppImage
 
   # Also upload to transfer.sh
-    - curl --upload-file ./rasterview-$VERSION-x86_64.AppImage  https://transfer.sh/rasterview-$VERSION-x86_64.AppImage
+    - curl --upload-file ./RasterView-$VERSION-x86_64.AppImage  https://transfer.sh/RasterView-$VERSION-x86_64.AppImage
 
 after_success:
   # Do nothing for now
