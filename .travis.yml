@@ -66,7 +66,7 @@ script:
 
   # See in Travis log what we've got:
     - find . -name "*.AppImage"
-    - find ./usr/bin -iname "*rasterview*"
+    - echo $(find . -iname "*rasterview*" 2>&1)
 
   # Rename our AppImage to include a version string
     - mv RasterView*.AppImage RasterView-$VERSION-x86_64.AppImage
