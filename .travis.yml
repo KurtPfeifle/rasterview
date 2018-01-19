@@ -18,8 +18,8 @@ before_script:
 script:
 
   # Debug settings
-    - set -e
-    - set -x
+    #- set -e
+    #- set -x
 
   # Build settings
     - export OMP_NUM_THREADS=1
