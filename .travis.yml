@@ -59,7 +59,7 @@ script: |
   find ./appdir -executable -type f -exec ldd {} \; | grep " => /usr" | cut -d " " -f 2-3 | sort | uniq
   
   # Set a version string
-  export VERSION="git.$(git rev-parse --short HEAD)"
+  export VERSION="git.$(git rev-parse --short HEAD)-v1.5"
   
   # See in Travis log what we've got:
   find . -name "*.AppImage"
