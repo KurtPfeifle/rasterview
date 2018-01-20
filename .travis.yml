@@ -71,6 +71,7 @@ script:
   # Rename our AppImage to include a version string
     - mv RasterView*.AppImage       rasterview-$VERSION-x86_64.AppImage
     - mv RasterView*.AppImage.zsync rasterview-$VERSION-x86_64.AppImage.zsync
+    - echo $(find . -iname "*.zsync")
 
   # Fetch probono's upload tool:
     - wget -c https://github.com/probonopd/uploadtool/raw/master/upload.sh
