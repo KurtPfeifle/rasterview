@@ -56,7 +56,7 @@ script:
     - ./linuxdeployqt*.AppImage --appimage-extract
 
   # Now run 'appimagetool' with our settings:
-    - PATH=./squashfs-root/usr/bin:$PATH ./squashfs-root/usr/bin/appimagetool -v -u 'gh-releases-zsync|KurtPfeifle|RasterView|continuous|RasterView-*x86_64.AppImage.zsync' ./appdir/
+    - PATH=./squashfs-root/usr/bin:$PATH ./squashfs-root/usr/bin/appimagetool -v -u 'gh-releases-zsync|KurtPfeifle|rasterview|continuous|rasterview-*x86_64.AppImage.zsync' ./appdir/
 
   # See if there are any libs left which point to the wrong directories:
     - find ./appdir -executable -type f -exec ldd {} \; | grep " => /usr" | cut -d " " -f 2-3 | sort | uniq
