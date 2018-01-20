@@ -65,11 +65,12 @@ script:
     - export VERSION="v1.5.2-git.$(git rev-parse --short HEAD)"
 
   # See in Travis log what we've got:
-    - find . -name "*.AppImage"
+    - find . -name "*.AppImage*"
     - echo $(find . -iname "*rasterview*" 2>&1)
 
   # Rename our AppImage to include a version string
-    - mv RasterView*.AppImage rasterview-$VERSION-x86_64.AppImage
+    - mv RasterView*.AppImage       rasterview-$VERSION-x86_64.AppImage
+    - mv RasterView*.AppImage.zsync rasterview-$VERSION-x86_64.AppImage.zsync
 
   # Fetch probono's upload tool:
     - wget -c https://github.com/probonopd/uploadtool/raw/master/upload.sh
