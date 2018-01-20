@@ -91,6 +91,7 @@ script:
     - echo $(find . -type d -name test)
     
    os: osx
+   
    script:
        - cd test
        - ./maketestfiles.sh all help
