@@ -1,1 +1,3 @@
 
+build_script:
+    - cmd: msbuild vcnet/ippsample.sln /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
