@@ -90,19 +90,19 @@ script:
     - ls -l test
     - echo $(find . -type d -name test)
     
-   #  os: osx
-   #  
-   #    - cd test
-   #    - ./maketestfiles.sh all help
-   #    - ./maketestfiles.sh all apple
-   #    - ./maketestfiles.sh all pwg
-   #    - ./maketestfiles.sh all ras
-   #    - for i in *.apple *.ras *.pwg ; do gzip $i ; done
-   #    - rm -rf *.log
-   #    - cd ..
-   #    - mv test rasterview-sample-files
-   #    - tar cvzf rasterview-sample-files.tar.gz rasterview-sample-files/
-   #    - bash upload.sh rasterview-sample-files.tar.gz
+   os: osx
+   script:
+       - cd test
+       - ./maketestfiles.sh all help
+       - ./maketestfiles.sh all apple
+       - ./maketestfiles.sh all pwg
+       - ./maketestfiles.sh all ras
+       - for i in *.apple *.ras *.pwg ; do gzip $i ; done
+       - rm -rf *.log
+       - cd ..
+       - mv test rasterview-sample-files
+       - tar cvzf rasterview-sample-files.tar.gz rasterview-sample-files/
+       - bash upload.sh rasterview-sample-files.tar.gz
 
 after_success:
   # Do nothing for now
