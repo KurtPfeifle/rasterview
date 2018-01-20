@@ -13,6 +13,23 @@ More information can be found at:
 
     https://michaelrsweet.github.io/rasterview
 
+## AppImage binary for Linux users
+
+Experimental releases of binary 'AppImage' builds for 64bit Linux users are available
+from Kurt Pfeifle's forked repository:
+
+    https://github.com/KurtPfeifle/rasterview/releases
+
+To use these for testing:
+
+1. Download the current .AppImage
+1. Make it executable: `chmod +x rasterview-*.AppImage`
+
+See below how to generate CUPS-, PWG- and Apple-raster test files.
+
+!["RasterView 'help' window"](https://i.stack.imgur.com/VQcZh.png "RasterView 'help' window")
+
+!["RasterView document window with 'Page Attributes' panel enabled"](https://i.stack.imgur.com/odmMr.png "RasterView document window with 'Page Attributes' panel enabled")
 
 ## Requirements
 
@@ -34,8 +51,8 @@ The program is called "rasterview" on UNIX/Linux and "RasterView.app" on macOS.
 Run the program and then open a raster file, or pass the filename on the
 command-line.  You can view multiple files simultaneously.
 
-The "test" subdirectory includes a script for generating raster data using the
-standard RIP filters.  Run the following command for help:
+The "test" subdirectory in the sources includes a script for generating raster
+data using the standard RIP filters.  Run the following command for help:
 
     tools/maketestfiles.sh help
 
