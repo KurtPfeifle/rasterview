@@ -62,23 +62,23 @@ script:
     - find ./appdir -executable -type f -exec ldd {} \; | grep " => /usr" | cut -d " " -f 2-3 | sort | uniq
 
   # Set a version string
-    - export VERSION="git.$(git rev-parse --short HEAD)-v1.5"
+    - export VERSION="v1.5-git.$(git rev-parse --short HEAD)"
 
   # See in Travis log what we've got:
     - find . -name "*.AppImage"
     - echo $(find . -iname "*rasterview*" 2>&1)
 
   # Rename our AppImage to include a version string
-    - mv RasterView*.AppImage RasterView-$VERSION-x86_64.AppImage
+    - mv RasterView*.AppImage rasterview-$VERSION-x86_64.AppImage
 
   # Fetch probono's upload tool:
     - wget -c https://github.com/probonopd/uploadtool/raw/master/upload.sh
 
   # Upload our AppImage to the GitHub releases page:
-    - bash upload.sh RasterView-$VERSION-x86_64.AppImage
+    - bash upload.sh rasterview-$VERSION-x86_64.AppImage
 
   # Also upload to transfer.sh
-    - curl --upload-file ./RasterView-$VERSION-x86_64.AppImage  https://transfer.sh/RasterView-$VERSION-x86_64.AppImage
+    - curl --upload-file ./rasterview-$VERSION-x86_64.AppImage  https://transfer.sh/rasterview-$VERSION-x86_64.AppImage
 
 after_success:
   # Do nothing for now
