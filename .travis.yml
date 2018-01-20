@@ -69,9 +69,10 @@ script:
     - echo $(find . -iname "*rasterview*" 2>&1)
 
   # Rename our AppImage to include a version string
-    - mv RasterView*.AppImage       rasterview-$VERSION-x86_64.AppImage
-    - mv RasterView*.AppImage.zsync rasterview-$VERSION-x86_64.AppImage.zsync
-    - echo $(find . -iname "*.zsync")
+    - cp RasterView*.AppImage       rasterview-$VERSION-x86_64.AppImage
+    - cp RasterView*.AppImage.zsync rasterview-$VERSION-x86_64.AppImage.zsync
+    - echo "$(find . -iname "*.zsync")"
+    - echo "$(find . -iname "*.AppImage")"
 
   # Fetch probono's upload tool:
     - wget -c https://github.com/probonopd/uploadtool/raw/master/upload.sh
@@ -79,6 +80,8 @@ script:
   # Upload our AppImage to the GitHub releases page:
     - bash upload.sh rasterview-$VERSION-x86_64.AppImage
     - bash upload.sh rasterview-$VERSION-x86_64.AppImage.zsync
+    - bash upload.sh RasterView-x86_64.AppImage
+    - bash upload.sh RasterView-x86_64.AppImage.zsync
 
   # Also upload to transfer.sh
     - curl --upload-file ./rasterview-$VERSION-x86_64.AppImage  https://transfer.sh/rasterview-$VERSION-x86_64.AppImage
