@@ -1,4 +1,8 @@
-[![AppImage Build Status](https://travis-ci.org/KurtPfeifle/rasterview.svg?branch=continuous)](https://travis-ci.org/KurtPfeifle/rasterview "AppImage Build Status")
+[![AppImage Build Status](https://travis-ci.org/KurtPfeifle/rasterview.svg?branch=continuous)](https://travis-ci.org/KurtPfeifle/rasterview "AppImage Build Status") <= AppImage Build Status
+
+### This Repo is cloned from original solely to build an AppImage
+
+----
 
 # RasterView v1.5
 
