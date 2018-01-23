@@ -16,7 +16,7 @@
 dnl We need at least autoconf 2.50...
 AC_PREREQ(2.60)
 
-AC_INIT([RasterView],[1.5.2],[https://github.com/michaelrsweet/rasterview/issues],[rasterview],[https://michaelrsweet.github.io/rasterview])
+AC_INIT([RasterView],[1.6],[https://github.com/michaelrsweet/rasterview/issues],[rasterview],[https://michaelrsweet.github.io/rasterview])
 
 dnl Version number...
 VERSION="AC_PACKAGE_VERSION"
@@ -73,6 +73,9 @@ else
 fi
 
 AC_SUBST(FLTKCONFIG)
+
+dnl Make sure we include zlib (always available via FLTK)
+AC_SEARCH_LIBS(gzopen, z)
 
 dnl Support large files.
 AC_SYS_LARGEFILE
